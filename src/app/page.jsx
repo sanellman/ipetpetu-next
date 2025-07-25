@@ -24,7 +24,10 @@ function Countdown() {
   if (timeLeft.total <= 0) return null;
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#fffbe7] to-[#fffde0] flex flex-col items-center px-4 py-10 text-[#4a3f2f]">
+    <div
+  className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center px-4 py-10 text-[#4a3f2f]"
+  style={{ backgroundImage: "url('/images/blackgrounds/flower2.jpg')" }}
+>
       
       {/* Countdown Card */}
       <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-yellow-200 shadow-lg rounded-2xl p-6 mb-8 text-center">
