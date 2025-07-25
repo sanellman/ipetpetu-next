@@ -24,58 +24,47 @@ function Countdown() {
   if (timeLeft.total <= 0) return null;
 
   return (
-    <>
-      <div className="min-h-screen flex flex-col items-center justify-start bg-[#fffbe7] text-[#4a3f2f] px-4 py-10">
-
-        {/* Countdown */}
-        <div className="text-center w-full max-w-xl bg-white/60 backdrop-blur-md border border-yellow-200 rounded-2xl shadow-lg px-6 py-8">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-[#4a3f2f] leading-tight">
-            🎂 Countdown to<br className="sm:hidden" /> Petpet's Day 🎉
-          </h1>
-          <div className="mt-4 grid grid-cols-4 gap-4 text-[#4a3f2f] text-xl sm:text-2xl font-mono font-semibold">
-            <div className="flex flex-col items-center">
-              <span className="bg-yellow-100 px-4 py-2 rounded-xl shadow">{timeLeft.days}</span>
-              <span className="mt-1 text-sm font-medium">Days</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="bg-yellow-100 px-4 py-2 rounded-xl shadow">{timeLeft.hours}</span>
-              <span className="mt-1 text-sm font-medium">Hours</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="bg-yellow-100 px-4 py-2 rounded-xl shadow">{timeLeft.minutes}</span>
-              <span className="mt-1 text-sm font-medium">Minutes</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="bg-yellow-100 px-4 py-2 rounded-xl shadow">{timeLeft.seconds}</span>
-              <span className="mt-1 text-sm font-medium">Seconds</span>
-            </div>
-          </div>
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#fffbe7] to-[#fffde0] flex flex-col items-center px-4 py-10 text-[#4a3f2f]">
+      
+      {/* Countdown Card */}
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-yellow-200 shadow-lg rounded-2xl p-6 mb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
+          🎂 Countdown to <br />
+          <span className="text-yellow-600">Petpet's Day 🎉</span>
+        </h1>
+        <div className="flex justify-center gap-4 text-xl sm:text-2xl font-mono">
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.days}d</div>
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.hours}h</div>
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.minutes}m</div>
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.seconds}s</div>
         </div>
-
-        {/* Flip Card Game */}
-        <section className="w-full max-w-3xl">
-          <FlipCardGame />
-        </section>
-        <footer className="mt-12 text-center border-t border-yellow-200 pt-6">
-          <p className="text-sm mb-2">ติดตาม Petpet ได้ที่ 💛</p>
-          <div className="flex justify-center gap-6 text-2xl text-[#4a3f2f]">
-            <a href="https://www.facebook.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">
-              <FaFacebook className="hover:text-blue-500 transition" />
-            </a>
-            <a href="https://instagram.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">
-              <FaInstagram className="hover:text-pink-500 transition" />
-            </a>
-            <a href="https://www.x.com/petpet_euphonie" target="_blank" rel="noopener noreferrer">
-              <FaXTwitter className="hover:text-red-500 transition" />
-            </a>
-            <a href="https://www.tiktok.com/@petpet.euphonie" target="_blank" rel="noopener noreferrer">
-              <FaTiktok className="hover:text-red-500 transition" />
-            </a>
-          </div>
-          <p className="mt-4 text-xs text-gray-400">© 2025 Petpet Fan Project</p>
-        </footer>
       </div>
-    </>
+
+      {/* Flip Card Game */}
+      <section className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl p-6 mb-10">
+        <FlipCardGame />
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center border-t border-yellow-200 pt-6 w-full max-w-3xl">
+        <p className="text-sm mb-2">ติดตาม Petpet ได้ที่ 💛</p>
+        <div className="flex justify-center gap-6 text-2xl text-[#4a3f2f]">
+          <a href="https://www.facebook.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="hover:text-blue-500 transition" />
+          </a>
+          <a href="https://instagram.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">
+            <FaInstagram className="hover:text-pink-500 transition" />
+          </a>
+          <a href="https://x.com/petpet_euphonie" target="_blank" rel="noopener noreferrer">
+            <FaXTwitter className="hover:text-black transition" />
+          </a>
+          <a href="https://www.tiktok.com/@petpet.euphonie" target="_blank" rel="noopener noreferrer">
+            <FaTiktok className="hover:text-black transition" />
+          </a>
+        </div>
+        <p className="mt-4 text-xs text-gray-400">© 2025 Petpet Fan Project</p>
+      </footer>
+    </div>
   );
 }
 
