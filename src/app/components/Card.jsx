@@ -15,7 +15,7 @@ export default function Card({ card, onClick }) {
       >
         {/* Back side */}
         <div className="absolute inset-0 [backface-visibility:hidden] bg-yellow-200 rounded-xl shadow-md flex items-center justify-center text-xl font-bold">
-          ?
+          
         </div>
 
         {/* Front side */}
