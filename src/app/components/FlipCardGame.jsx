@@ -14,10 +14,29 @@ const cardImages = [
   "/images/cards/card6.jpg",
   "/images/cards/card7.jpg",
   "/images/cards/card8.jpg",
+  "/images/cards/card9.jpg",
+  "/images/cards/card10.jpg",
+  "/images/cards/card11.jpg",
+  "/images/cards/card12.jpg",
+  "/images/cards/card13.jpg",
+  "/images/cards/card14.jpg",
+  "/images/cards/card15.jpg",
+  "/images/cards/card16.jpg",
+  "/images/cards/card17.jpg",
+  "/images/cards/card18.jpg",
+  "/images/cards/card19.jpg",
+  "/images/cards/card20.jpg",
 ];
 
+function getRandomImages(images, count) {
+  const shuffled = [...images].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+
 function shuffleCards() {
-  const duplicated = [...cardImages, ...cardImages];
+  const selected = getRandomImages(cardImages, 8); // ดึงมา 8 รูปแบบสุ่ม
+  const duplicated = [...selected, ...selected];
   return duplicated
     .map((src) => ({ id: uuidv4(), src, flipped: false, matched: false }))
     .sort(() => Math.random() - 0.5);
