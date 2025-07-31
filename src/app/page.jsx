@@ -49,7 +49,7 @@ function Countdown() {
       </div>
 
       {/* Flip Card Game */}
-      <section className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl p-6 mb-10">
+      <section className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl p-2 mb-10">
         <ScheduleSection />
       </section>
 
