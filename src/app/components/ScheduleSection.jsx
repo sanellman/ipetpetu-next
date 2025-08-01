@@ -39,6 +39,8 @@ export default function ScheduleSection() {
 
   const groupOptions = [
     { value: "ANGeVIL✟", label: "ANGeVIL✟" },
+    { value: "BNK48", label: "BNK48" },
+    { value: "CGM48", label: "CGM48" },
     { value: "Euphonie", label: "Euphonie" },
     { value: "HatoBito", label: "HatoBito" },
     { value: "IKINARI TELL ME", label: "IKINARI TELL ME" },
@@ -51,6 +53,7 @@ export default function ScheduleSection() {
     { value: "NIKKO NIKKO", label: "NIKKO NIKKO" },
     { value: "Peach You", label: "Peach You" },
     { value: "Seishin Kakumei", label: "Seishin Kakumei" },
+    { value: "Siamdol Cafe", label: "Siamdol Cafe" },
     { value: "Sora! Sora!", label: "Sora! Sora!" },
     { value: "STARRY NITE", label: "STARRY NITE" },
     { value: "Stellagrima", label: "Stellagrima" },
