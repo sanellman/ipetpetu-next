@@ -182,34 +182,38 @@ export default function ScheduleSection() {
   };
 
   const renderListView = () => {
-    const sortedEvents = [...events].sort((a, b) => a.date.localeCompare(b.date));
+  const today = new Date().toISOString().split("T")[0];
 
-    if (sortedEvents.length === 0) {
-      return <p className="text-sm text-gray-500">No events yet.</p>;
-    }
+  const upcomingEvents = [...events]
+    .filter((event) => event.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
 
-    return (
-      <div className="divide-y text-sm">
-        {sortedEvents.map((event) => (
-          <div
-            key={event.id}
-            className="py-3 px-2 hover:bg-yellow-50 cursor-pointer rounded"
-            onClick={() => handleEventClick(event)}
-          >
-            <div className="font-medium flex justify-between">
-              <span>📆 {event.date}</span>
-              <span className="text-yellow-700">{event.group}</span>
-            </div>
-            <div className="text-xs text-gray-600 mt-1 space-y-1">
-              {event.stageTime && <div>🎤 Stage: {event.stageTime}</div>}
-              {event.chekiTime && <div>📸 Cheki: {event.chekiTime}</div>}
-              {event.note && <div>📝 {event.note}</div>}
-            </div>
+  if (upcomingEvents.length === 0) {
+    return <p className="text-sm text-gray-500">No upcoming events.</p>;
+  }
+
+  return (
+    <div className="divide-y text-sm">
+      {upcomingEvents.map((event) => (
+        <div
+          key={event.id}
+          className="py-3 px-2 hover:bg-yellow-50 cursor-pointer rounded"
+          onClick={() => handleEventClick(event)}
+        >
+          <div className="font-medium flex justify-between">
+            <span>📆 {event.date}</span>
+            <span className="text-yellow-700">{event.group}</span>
           </div>
-        ))}
-      </div>
-    );
-  };
+          <div className="text-xs text-gray-600 mt-1 space-y-1">
+            {event.stageTime && <div>🎤 Stage: {event.stageTime}</div>}
+            {event.chekiTime && <div>📸 Cheki: {event.chekiTime}</div>}
+            {event.note && <div>📝 {event.note}</div>}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
   return (
     <section className="bg-[#fffef3] text-[#4a3f2f] py-10 px-1">
