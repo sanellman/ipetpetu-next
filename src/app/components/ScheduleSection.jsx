@@ -30,11 +30,27 @@ export default function ScheduleSection() {
   const [isEditing, setIsEditing] = useState(false);
 
   const groupOptions = [
-    { value: "Euphonie", label: "Euphonie" },
-    { value: "TheGlassGirls", label: "The Glass Girls" },
-    { value: "PeachYou", label: "Peach You" },
-    { value: "Vinx", label: "Vinx" },
-  ];
+  { value: "ANGeVIL✟", label: "ANGeVIL✟" },
+  { value: "Euphonie", label: "Euphonie" },
+  { value: "HatoBito", label: "HatoBito" },
+  { value: "IKINARI TELL ME", label: "IKINARI TELL ME" },
+  { value: "Isekai", label: "Isekai" },
+  { value: "KNIGHT✠RES", label: "KNIGHT✠RES" },
+  { value: "KYLINZ", label: "KYLINZ" },
+  { value: "Mirai Mirai", label: "Mirai Mirai" },
+  { value: "Myujikku Majo", label: "Myujikku Majo" },
+  { value: "Neko Pon!", label: "Neko Pon!" },
+  { value: "NIKKO NIKKO", label: "NIKKO NIKKO" },
+  { value: "Peach You", label: "Peach You" },
+  { value: "Seishin Kakumei", label: "Seishin Kakumei" },
+  { value: "Sora! Sora!", label: "Sora! Sora!" },
+  { value: "STARRY NITE", label: "STARRY NITE" },
+  { value: "Stellagrima", label: "Stellagrima" },
+  { value: "SUMOMO", label: "SUMOMO" },
+  { value: "The Glass Girls", label: "The Glass Girls" },
+  { value: "Vinx", label: "Vinx" },
+  { value: "Yami Yami", label: "Yami Yami" },
+];
 
   // โหลด events จาก localStorage ตอน mount
   useEffect(() => {
@@ -49,16 +65,7 @@ export default function ScheduleSection() {
         }
       } else {
         // ถ้าไม่มีใน localStorage ให้ใส่ event เริ่มต้น
-        setEvents([
-          {
-            id: 1,
-            group: "Euphonie",
-            date: "2025-07-30",
-            stageTime: "13:00 - 13:30",
-            chekiTime: "14:00 - 15:00",
-            note: "Main stage at IdolFest",
-          },
-        ]);
+        setEvents([]);
       }
     } catch {
       setEvents([]);
@@ -242,6 +249,22 @@ export default function ScheduleSection() {
             </h3>
 
             <div className="space-y-3">
+              <label className="block text-sm font-medium mt-2 mb-1">
+                Date
+              </label>
+              <input
+                type="date"
+                className="w-full border px-3 py-1 rounded"
+                value={modalEvent.date}
+                onChange={(e) =>
+                  setModalEvent({ ...modalEvent, date: e.target.value })
+                }
+                disabled={!isEditing && modalEvent.id}
+              />
+
+              <label className="block text-sm font-medium mt-2 mb-1">
+                Group
+              </label>
               <Select
                 options={groupOptions}
                 value={groupOptions.find(
@@ -253,16 +276,6 @@ export default function ScheduleSection() {
                 isClearable
                 placeholder="Select Group"
                 isDisabled={!isEditing && modalEvent.id}
-              />
-
-              <input
-                type="date"
-                className="w-full border px-3 py-1 rounded"
-                value={modalEvent.date}
-                onChange={(e) =>
-                  setModalEvent({ ...modalEvent, date: e.target.value })
-                }
-                disabled={!isEditing && modalEvent.id}
               />
 
               {isEditing && (

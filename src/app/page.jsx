@@ -16,6 +16,7 @@ const TARGET_DATE = new Date("2025-09-16T00:00:00+07:00");
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
   const [mounted, setMounted] = useState(false);
+  const [activeTab, setActiveTab] = useState("schedule");
 
   useEffect(() => {
     setMounted(true);
@@ -30,10 +31,10 @@ function Countdown() {
 
   return (
     <div
-  className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center px-4 py-10 text-[#4a3f2f]"
-  style={{ backgroundImage: "url('/images/blackgrounds/flower2.jpg')" }}
->
-      
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center px-4 py-10 text-[#4a3f2f]"
+      style={{ backgroundImage: "url('/images/blackgrounds/flower2.jpg')" }}
+    >
+
       {/* Countdown Card */}
       <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-yellow-200 shadow-lg rounded-2xl p-6 mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
@@ -48,15 +49,30 @@ function Countdown() {
         </div>
       </div>
 
-      {/* Flip Card Game */}
-      <section className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl p-2 mb-10">
-        <ScheduleSection />
-      </section>
+      {/* Tabs: Schedule & Flip Card Game */}
+      <div className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl mb-10">
+        {/* Tab headers */}
+        <div className="flex justify-around border-b border-yellow-200">
+          <button
+            className={`flex-1 py-3 font-semibold ${activeTab === "schedule" ? "bg-yellow-100" : ""}`}
+            onClick={() => setActiveTab("schedule")}
+          >
+            📅 Schedule
+          </button>
+          <button
+            className={`flex-1 py-3 font-semibold ${activeTab === "flipcard" ? "bg-yellow-100" : ""}`}
+            onClick={() => setActiveTab("flipcard")}
+          >
+            🃏 Flip Card Game
+          </button>
+        </div>
 
-      {/* Flip Card Game */}
-      <section className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl p-6 mb-10">
-        <FlipCardGame />
-      </section>
+        {/* Tab content */}
+        <div className="p-4">
+          {activeTab === "schedule" && <ScheduleSection />}
+          {activeTab === "flipcard" && <FlipCardGame />}
+        </div>
+      </div>
 
       {/* Footer */}
       <footer className="text-center border-t border-yellow-200 pt-6 w-full max-w-3xl">
