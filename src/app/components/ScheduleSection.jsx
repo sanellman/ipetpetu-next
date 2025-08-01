@@ -16,6 +16,7 @@ import {
 } from "date-fns";
 
 const STORAGE_KEY = "idolScheduleEvents";
+const VIEW_MODE_KEY = "idolScheduleViewMode";
 
 export default function ScheduleSection() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -28,7 +29,13 @@ export default function ScheduleSection() {
   });
   const [modalEvent, setModalEvent] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [viewMode, setViewMode] = useState("calendar"); // new
+  const [viewMode, setViewMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(VIEW_MODE_KEY);
+      return saved === "list" ? "list" : "calendar";
+    }
+    return "calendar";
+  });
 
   const groupOptions = [
     { value: "ANGeVIL✟", label: "ANGeVIL✟" },
@@ -70,6 +77,10 @@ export default function ScheduleSection() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
   }, [events]);
+
+  useEffect(() => {
+  localStorage.setItem(VIEW_MODE_KEY, viewMode);
+}, [viewMode]);
 
   const handleAddClick = () => {
     setIsEditing(true);
