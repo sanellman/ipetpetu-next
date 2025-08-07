@@ -82,8 +82,8 @@ export default function ScheduleSection() {
   }, [events]);
 
   useEffect(() => {
-  localStorage.setItem(VIEW_MODE_KEY, viewMode);
-}, [viewMode]);
+    localStorage.setItem(VIEW_MODE_KEY, viewMode);
+  }, [viewMode]);
 
   const handleAddClick = () => {
     setIsEditing(true);
@@ -114,15 +114,34 @@ export default function ScheduleSection() {
   const handleSave = () => {
     const updatedEvent = {
       ...modalEvent,
-      stageTime: modalEvent.stageTimeStart && modalEvent.stageTimeEnd ? `${modalEvent.stageTimeStart} - ${modalEvent.stageTimeEnd}` : "",
-      chekiTime: modalEvent.chekiTimeStart && modalEvent.chekiTimeEnd ? `${modalEvent.chekiTimeStart} - ${modalEvent.chekiTimeEnd}` : "",
+      stageTime:
+        modalEvent.stageTimeStart && modalEvent.stageTimeEnd
+          ? `${modalEvent.stageTimeStart} - ${modalEvent.stageTimeEnd}`
+          : "",
+      chekiTime:
+        modalEvent.chekiTimeStart && modalEvent.chekiTimeEnd
+          ? `${modalEvent.chekiTimeStart} - ${modalEvent.chekiTimeEnd}`
+          : "",
     };
 
-    if (updatedEvent.id) {
-      setEvents((prev) => prev.map((e) => (e.id === updatedEvent.id ? updatedEvent : e)));
-    } else {
-      setEvents((prev) => [...prev, { ...updatedEvent, id: Date.now() }]);
-    }
+    setEvents((prevEvents) => {
+      let newEvents;
+      if (updatedEvent.id) {
+        // Editing existing event
+        newEvents = prevEvents.map((e) =>
+          e.id === updatedEvent.id ? updatedEvent : e
+        );
+      } else {
+        // Adding new event
+        newEvents = [...prevEvents, { ...updatedEvent, id: Date.now() }];
+      }
+
+      // Limit to last 50 events (FIFO)
+      const limitedEvents = newEvents.slice(-50);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(limitedEvents));
+      return limitedEvents;
+    });
+
     setModalEvent(null);
     setIsEditing(false);
   };
@@ -185,38 +204,38 @@ export default function ScheduleSection() {
   };
 
   const renderListView = () => {
-  const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toISOString().split("T")[0];
 
-  const upcomingEvents = [...events]
-    .filter((event) => event.date >= today)
-    .sort((a, b) => a.date.localeCompare(b.date));
+    const upcomingEvents = [...events]
+      .filter((event) => event.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date));
 
-  if (upcomingEvents.length === 0) {
-    return <p className="text-sm text-gray-500">No upcoming events.</p>;
-  }
+    if (upcomingEvents.length === 0) {
+      return <p className="text-sm text-gray-500">No upcoming events.</p>;
+    }
 
-  return (
-    <div className="divide-y text-sm">
-      {upcomingEvents.map((event) => (
-        <div
-          key={event.id}
-          className="py-3 px-2 hover:bg-yellow-50 cursor-pointer rounded"
-          onClick={() => handleEventClick(event)}
-        >
-          <div className="font-medium flex justify-between">
-            <span>📆 {event.date}</span>
-            <span className="text-yellow-700">{event.group}</span>
+    return (
+      <div className="divide-y text-sm">
+        {upcomingEvents.map((event) => (
+          <div
+            key={event.id}
+            className="py-3 px-2 hover:bg-yellow-50 cursor-pointer rounded"
+            onClick={() => handleEventClick(event)}
+          >
+            <div className="font-medium flex justify-between">
+              <span>📆 {event.date}</span>
+              <span className="text-yellow-700">{event.group}</span>
+            </div>
+            <div className="text-xs text-gray-600 mt-1 space-y-1">
+              {event.stageTime && <div>🎤 Stage: {event.stageTime}</div>}
+              {event.chekiTime && <div>📸 Cheki: {event.chekiTime}</div>}
+              {event.note && <div>📝 {event.note}</div>}
+            </div>
           </div>
-          <div className="text-xs text-gray-600 mt-1 space-y-1">
-            {event.stageTime && <div>🎤 Stage: {event.stageTime}</div>}
-            {event.chekiTime && <div>📸 Cheki: {event.chekiTime}</div>}
-            {event.note && <div>📝 {event.note}</div>}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+        ))}
+      </div>
+    );
+  };
 
   return (
     <section className="bg-[#fffef3] text-[#4a3f2f] py-10 px-1">
