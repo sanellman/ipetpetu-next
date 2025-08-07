@@ -10,6 +10,8 @@ import AboutSection from "./components/AboutSection";
 import GallerySection from "./components/GallerySection";
 import ScheduleSection from "./components/ScheduleSection";
 import FlipCardGame from "./components/FlipCardGame";
+import ExpensesTab from "./components/ExpensesTab"; // ปรับ path ให้ถูกตามโครงสร้างโปรเจค
+
 
 const TARGET_DATE = new Date("2025-09-16T00:00:00+07:00");
 
@@ -49,7 +51,7 @@ function Countdown() {
         </div>
       </div>
 
-      {/* Tabs: Schedule & Flip Card Game */}
+      {/* Tabs: Schedule, Flip Card Game & Expenses */}
       <div className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl mb-10">
         {/* Tab headers */}
         <div className="flex justify-around border-b border-yellow-200">
@@ -58,6 +60,12 @@ function Countdown() {
             onClick={() => setActiveTab("schedule")}
           >
             📅 Schedule
+          </button>
+          <button
+            className={`flex-1 py-3 font-semibold ${activeTab === "expenses" ? "bg-yellow-100" : ""}`}
+            onClick={() => setActiveTab("expenses")}
+          >
+            💸 Expenses
           </button>
           <button
             className={`flex-1 py-3 font-semibold ${activeTab === "flipcard" ? "bg-yellow-100" : ""}`}
@@ -71,8 +79,10 @@ function Countdown() {
         <div className="p-4">
           {activeTab === "schedule" && <ScheduleSection />}
           {activeTab === "flipcard" && <FlipCardGame />}
+          {activeTab === "expenses" && <ExpensesTab />}
         </div>
       </div>
+
 
       {/* Footer */}
       <footer className="text-center border-t border-yellow-200 pt-6 w-full max-w-3xl">

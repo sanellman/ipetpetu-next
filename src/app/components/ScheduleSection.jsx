@@ -18,6 +18,11 @@ import {
 const STORAGE_KEY = "idolScheduleEvents";
 const VIEW_MODE_KEY = "idolScheduleViewMode";
 
+function formatDate(dateString) {
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
+}
+
 export default function ScheduleSection() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [events, setEvents] = useState(() => {
@@ -223,7 +228,7 @@ export default function ScheduleSection() {
             onClick={() => handleEventClick(event)}
           >
             <div className="font-medium flex justify-between">
-              <span>📆 {event.date}</span>
+              <span>📆 {formatDate(event.date)}</span>
               <span className="text-yellow-700">{event.group}</span>
             </div>
             <div className="text-xs text-gray-600 mt-1 space-y-1">
