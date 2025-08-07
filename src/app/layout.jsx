@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Fredoka } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const fredoka = Fredoka({ subsets: ['latin'], weight: ['400', '700'] });
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
         className={`${fredoka.className} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
