@@ -66,6 +66,7 @@ export default function ScheduleSection() {
     { value: "The Glass Girls", label: "The Glass Girls" },
     { value: "Vinx", label: "Vinx" },
     { value: "Yami Yami", label: "Yami Yami" },
+    { value: "Other", label: "Other" },
   ];
 
   useEffect(() => {
@@ -131,6 +132,9 @@ export default function ScheduleSection() {
 
     setEvents((prevEvents) => {
       let newEvents;
+      if (!updatedEvent.group) {
+        updatedEvent.group = "Other"; // Default to "Other" if no group selected
+      }
       if (updatedEvent.id) {
         // Editing existing event
         newEvents = prevEvents.map((e) =>
@@ -208,12 +212,57 @@ export default function ScheduleSection() {
     return <div>{rows}</div>;
   };
 
+  // ใส่ไว้เหนือ renderListView() หรือภายในก็ได้
+const timeToMinutes = (t) => {
+  if (!t) return Infinity;
+  const [h, m] = t.split(":").map(Number);
+  return Number.isFinite(h) && Number.isFinite(m) ? h * 60 + m : Infinity;
+};
+
+const getHasStage = (e) =>
+  !!e.stageTime || (!!e.stageTimeStart && !!e.stageTimeEnd);
+
+const getHasCheki = (e) =>
+  !!e.chekiTime || (!!e.chekiTimeStart && !!e.chekiTimeEnd);
+
+const getStartTime = (e, kind) => {
+  if (kind === "stage") {
+    const v = e.stageTimeStart || (e.stageTime?.split(" - ")[0] ?? "");
+    return timeToMinutes(v);
+  }
+  const v = e.chekiTimeStart || (e.chekiTime?.split(" - ")[0] ?? "");
+  return timeToMinutes(v);
+};
+
   const renderListView = () => {
     const today = new Date().toISOString().split("T")[0];
 
     const upcomingEvents = [...events]
-      .filter((event) => event.date >= today)
-      .sort((a, b) => a.date.localeCompare(b.date));
+  .filter((event) => event.date >= today)
+  .sort((a, b) => {
+    // 1) วันที่
+    if (a.date !== b.date) return a.date.localeCompare(b.date);
+
+    // 2) Priority: Stage > Cheki > อื่น ๆ
+    const aPri = getHasStage(a) ? 1 : getHasCheki(a) ? 2 : 99;
+    const bPri = getHasStage(b) ? 1 : getHasCheki(b) ? 2 : 99;
+    if (aPri !== bPri) return aPri - bPri;
+
+    // 3) เวลาเริ่ม: ถ้าเป็น Stage เทียบ stageStart, ถ้าเป็น Cheki เทียบ chekiStart
+    if (aPri === 1) {
+      const ta = getStartTime(a, "stage");
+      const tb = getStartTime(b, "stage");
+      if (ta !== tb) return ta - tb;
+    } else if (aPri === 2) {
+      const ta = getStartTime(a, "cheki");
+      const tb = getStartTime(b, "cheki");
+      if (ta !== tb) return ta - tb;
+    }
+
+    // 4) ผูกด้วยชื่อกลุ่มกันลำดับสวิง
+    return (a.group || "").localeCompare(b.group || "");
+  });
+
 
     if (upcomingEvents.length === 0) {
       return <p className="text-sm text-gray-500">No upcoming events.</p>;
