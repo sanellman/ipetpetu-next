@@ -46,6 +46,7 @@ export default function ScheduleSection() {
     { value: "ANGeVIL✟", label: "ANGeVIL✟" },
     { value: "BNK48", label: "BNK48" },
     { value: "CGM48", label: "CGM48" },
+    { value: "Chocolatière", label: "Chocolatière" },
     { value: "Euphonie", label: "Euphonie" },
     { value: "HatoBito", label: "HatoBito" },
     { value: "IKINARI TELL ME", label: "IKINARI TELL ME" },
@@ -237,40 +238,38 @@ export default function ScheduleSection() {
   const renderListView = () => {
     const today = new Date().toISOString().split("T")[0];
 
-    const upcomingEvents = [...events]
+    // เรียง events ตามเวลาที่เร็วที่สุด (Stage หรือ Cheki)
+    const sortedEvents = [...events]
       .filter((event) => event.date >= today)
       .sort((a, b) => {
-        // 1) วันที่
+        const parseTime = (t) => {
+          if (!t) return Infinity;
+          const [h, m] = t.split(":").map(Number);
+          return h * 60 + m;
+        };
+
+        const aStageStart = a.stageTimeStart || (a.stageTime?.split(" - ")[0] ?? "");
+        const aChekiStart = a.chekiTimeStart || (a.chekiTime?.split(" - ")[0] ?? "");
+        const bStageStart = b.stageTimeStart || (b.stageTime?.split(" - ")[0] ?? "");
+        const bChekiStart = b.chekiTimeStart || (b.chekiTime?.split(" - ")[0] ?? "");
+
+        const aEarliest = Math.min(parseTime(aStageStart), parseTime(aChekiStart));
+        const bEarliest = Math.min(parseTime(bStageStart), parseTime(bChekiStart));
+
         if (a.date !== b.date) return a.date.localeCompare(b.date);
+        if (aEarliest !== bEarliest) return aEarliest - bEarliest;
 
-        // 2) Priority: Stage > Cheki > อื่น ๆ
-        const aPri = getHasStage(a) ? 1 : getHasCheki(a) ? 2 : 99;
-        const bPri = getHasStage(b) ? 1 : getHasCheki(b) ? 2 : 99;
-        if (aPri !== bPri) return aPri - bPri;
-
-        // 3) เวลาเริ่ม: ถ้าเป็น Stage เทียบ stageStart, ถ้าเป็น Cheki เทียบ chekiStart
-        if (aPri === 1) {
-          const ta = getStartTime(a, "stage");
-          const tb = getStartTime(b, "stage");
-          if (ta !== tb) return ta - tb;
-        } else if (aPri === 2) {
-          const ta = getStartTime(a, "cheki");
-          const tb = getStartTime(b, "cheki");
-          if (ta !== tb) return ta - tb;
-        }
-
-        // 4) ผูกด้วยชื่อกลุ่มกันลำดับสวิง
+        // ถ้าเวลาเท่ากัน ให้เรียงตามชื่อกลุ่ม
         return (a.group || "").localeCompare(b.group || "");
       });
 
-
-    if (upcomingEvents.length === 0) {
+    if (sortedEvents.length === 0) {
       return <p className="text-sm text-gray-500">No upcoming events.</p>;
     }
 
     return (
       <div className="divide-y text-sm">
-        {upcomingEvents.map((event) => (
+        {sortedEvents.map((event) => (
           <div
             key={event.id}
             className="py-3 px-2 hover:bg-yellow-50 cursor-pointer rounded"
@@ -281,10 +280,42 @@ export default function ScheduleSection() {
               <span className="text-yellow-700">{event.group}</span>
             </div>
             <div className="text-xs text-gray-600 mt-1 space-y-1">
-              {event.stageTime && <div>🎤 Stage: {event.stageTime}</div>}
-              {event.chekiTime && <div>📸 Cheki: {event.chekiTime}</div>}
-              {event.note && <div>📝 {event.note}</div>}
-            </div>
+  {(() => {
+    // เก็บ Stage และ Cheki พร้อมเวลาเริ่ม
+    const items = [];
+
+    if (event.stageTime) {
+      const [start] = event.stageTime.split(" - ");
+      items.push({ type: "stage", label: `🎤 Stage: ${event.stageTime}`, time: start });
+    }
+
+    if (event.chekiTime) {
+      const [start] = event.chekiTime.split(" - ");
+      items.push({ type: "cheki", label: `📸 Cheki: ${event.chekiTime}`, time: start });
+    }
+
+    // เรียงตามเวลาเริ่ม
+    items.sort((a, b) => {
+      const parseTime = (t) => {
+        if (!t) return Infinity;
+        const [h, m] = t.split(":").map(Number);
+        return h * 60 + m;
+      };
+      return parseTime(a.time) - parseTime(b.time);
+    });
+
+    // map ออกมาโชว์
+    return (
+      <>
+        {items.map((item, i) => (
+          <div key={i}>{item.label}</div>
+        ))}
+        {event.note && <div>📝 {event.note}</div>}
+      </>
+    );
+  })()}
+</div>
+
           </div>
         ))}
       </div>
