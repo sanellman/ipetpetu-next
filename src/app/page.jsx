@@ -76,7 +76,7 @@ function Countdown() {
         </div>
 
         {/* Tab content */}
-        <div className="p-4">
+        <div className="p-3">
           {activeTab === "schedule" && <ScheduleSection />}
           {activeTab === "flipcard" && <FlipCardGame />}
           {activeTab === "expenses" && <ExpensesTab />}

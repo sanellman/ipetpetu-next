@@ -327,7 +327,7 @@ export default function ScheduleSection() {
           </div>
         </div>
 
-        <div className="bg-white rounded shadow p-4">
+        <div className="bg-white rounded shadow p-2">
           {viewMode === "calendar" && (
             <>
               <div className="flex justify-between items-center mb-4">
