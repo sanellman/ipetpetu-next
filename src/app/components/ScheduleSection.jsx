@@ -213,55 +213,55 @@ export default function ScheduleSection() {
   };
 
   // ใส่ไว้เหนือ renderListView() หรือภายในก็ได้
-const timeToMinutes = (t) => {
-  if (!t) return Infinity;
-  const [h, m] = t.split(":").map(Number);
-  return Number.isFinite(h) && Number.isFinite(m) ? h * 60 + m : Infinity;
-};
+  const timeToMinutes = (t) => {
+    if (!t) return Infinity;
+    const [h, m] = t.split(":").map(Number);
+    return Number.isFinite(h) && Number.isFinite(m) ? h * 60 + m : Infinity;
+  };
 
-const getHasStage = (e) =>
-  !!e.stageTime || (!!e.stageTimeStart && !!e.stageTimeEnd);
+  const getHasStage = (e) =>
+    !!e.stageTime || (!!e.stageTimeStart && !!e.stageTimeEnd);
 
-const getHasCheki = (e) =>
-  !!e.chekiTime || (!!e.chekiTimeStart && !!e.chekiTimeEnd);
+  const getHasCheki = (e) =>
+    !!e.chekiTime || (!!e.chekiTimeStart && !!e.chekiTimeEnd);
 
-const getStartTime = (e, kind) => {
-  if (kind === "stage") {
-    const v = e.stageTimeStart || (e.stageTime?.split(" - ")[0] ?? "");
+  const getStartTime = (e, kind) => {
+    if (kind === "stage") {
+      const v = e.stageTimeStart || (e.stageTime?.split(" - ")[0] ?? "");
+      return timeToMinutes(v);
+    }
+    const v = e.chekiTimeStart || (e.chekiTime?.split(" - ")[0] ?? "");
     return timeToMinutes(v);
-  }
-  const v = e.chekiTimeStart || (e.chekiTime?.split(" - ")[0] ?? "");
-  return timeToMinutes(v);
-};
+  };
 
   const renderListView = () => {
     const today = new Date().toISOString().split("T")[0];
 
     const upcomingEvents = [...events]
-  .filter((event) => event.date >= today)
-  .sort((a, b) => {
-    // 1) วันที่
-    if (a.date !== b.date) return a.date.localeCompare(b.date);
+      .filter((event) => event.date >= today)
+      .sort((a, b) => {
+        // 1) วันที่
+        if (a.date !== b.date) return a.date.localeCompare(b.date);
 
-    // 2) Priority: Stage > Cheki > อื่น ๆ
-    const aPri = getHasStage(a) ? 1 : getHasCheki(a) ? 2 : 99;
-    const bPri = getHasStage(b) ? 1 : getHasCheki(b) ? 2 : 99;
-    if (aPri !== bPri) return aPri - bPri;
+        // 2) Priority: Stage > Cheki > อื่น ๆ
+        const aPri = getHasStage(a) ? 1 : getHasCheki(a) ? 2 : 99;
+        const bPri = getHasStage(b) ? 1 : getHasCheki(b) ? 2 : 99;
+        if (aPri !== bPri) return aPri - bPri;
 
-    // 3) เวลาเริ่ม: ถ้าเป็น Stage เทียบ stageStart, ถ้าเป็น Cheki เทียบ chekiStart
-    if (aPri === 1) {
-      const ta = getStartTime(a, "stage");
-      const tb = getStartTime(b, "stage");
-      if (ta !== tb) return ta - tb;
-    } else if (aPri === 2) {
-      const ta = getStartTime(a, "cheki");
-      const tb = getStartTime(b, "cheki");
-      if (ta !== tb) return ta - tb;
-    }
+        // 3) เวลาเริ่ม: ถ้าเป็น Stage เทียบ stageStart, ถ้าเป็น Cheki เทียบ chekiStart
+        if (aPri === 1) {
+          const ta = getStartTime(a, "stage");
+          const tb = getStartTime(b, "stage");
+          if (ta !== tb) return ta - tb;
+        } else if (aPri === 2) {
+          const ta = getStartTime(a, "cheki");
+          const tb = getStartTime(b, "cheki");
+          if (ta !== tb) return ta - tb;
+        }
 
-    // 4) ผูกด้วยชื่อกลุ่มกันลำดับสวิง
-    return (a.group || "").localeCompare(b.group || "");
-  });
+        // 4) ผูกด้วยชื่อกลุ่มกันลำดับสวิง
+        return (a.group || "").localeCompare(b.group || "");
+      });
 
 
     if (upcomingEvents.length === 0) {
@@ -292,31 +292,38 @@ const getStartTime = (e, kind) => {
   };
 
   return (
-    <section className="bg-[#fffef3] text-[#4a3f2f] py-10 px-1">
+    <section className="bg-[#fffef3] text-[#4a3f2f] py-1 px-1">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
-          <h2 className="text-2xl font-bold">📅 Idol Event Schedule</h2>
-          <div className="flex gap-2 items-center">
-            <button
-              onClick={handleAddClick}
-              className="text-sm px-3 py-1 rounded shadow bg-yellow-300"
-            >
-              ➕ Add Event
-            </button>
-            <div className="flex gap-2">
+        <div className="flex flex-col items-center mb-6 gap-4">
+          <h2 className="text-xl font-bold text-center">📅 Idol Event Schedule</h2>
+          <div className="flex gap-3 items-center">
+            <div className="flex bg-gray-200 rounded-full p-1 shadow-inner">
               <button
                 onClick={() => setViewMode("calendar")}
-                className={`text-sm px-3 py-1 rounded shadow ${viewMode === "calendar" ? "bg-yellow-300" : "bg-gray-200"}`}
+                className={`px-4 py-1 rounded-full text-sm font-medium transition-all ${viewMode === "calendar"
+                  ? "bg-yellow-400 text-white shadow"
+                  : "text-gray-600 hover:text-gray-800"
+                  }`}
               >
-                Calendar mode
+                📅 Calendar
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`text-sm px-3 py-1 rounded shadow ${viewMode === "list" ? "bg-yellow-300" : "bg-gray-200"}`}
+                className={`px-4 py-1 rounded-full text-sm font-medium transition-all ${viewMode === "list"
+                  ? "bg-yellow-400 text-white shadow"
+                  : "text-gray-600 hover:text-gray-800"
+                  }`}
               >
-                List mode
+                📋 List
               </button>
             </div>
+            {/* ปุ่ม Add Event */}
+            <button
+              onClick={handleAddClick}
+              className="px-2 py-1.5 rounded-full text-sm font-medium bg-yellow-400 text-white shadow hover:bg-yellow-500 transition-all duration-200"
+            >
+              ➕
+            </button>
           </div>
         </div>
 
@@ -328,14 +335,14 @@ const getStartTime = (e, kind) => {
                   onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
                   className="px-3 py-1 bg-[#fef3c7] rounded-md hover:bg-[#fde68a] text-sm"
                 >
-                  ← Prev
+                  &lt;
                 </button>
                 <h2 className="text-xl font-bold">{format(currentMonth, "MMMM yyyy")}</h2>
                 <button
                   onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
                   className="px-3 py-1 bg-[#fef3c7] rounded-md hover:bg-[#fde68a] text-sm"
                 >
-                  Next →
+                  &gt;
                 </button>
               </div>
               <div className="grid grid-cols-7 text-center text-sm font-semibold border-b pb-2">
