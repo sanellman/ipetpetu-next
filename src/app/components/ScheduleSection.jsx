@@ -320,7 +320,7 @@ export default function ScheduleSection() {
             {/* ปุ่ม Add Event */}
             <button
               onClick={handleAddClick}
-              className="px-2 py-1.5 rounded-full text-sm font-medium bg-yellow-400 text-white shadow hover:bg-yellow-500 transition-all duration-200"
+              className="px-2.5 py-2 rounded-full text-sm font-medium bg-yellow-400 text-white shadow hover:bg-yellow-500 transition-all duration-200"
             >
               ➕
             </button>
