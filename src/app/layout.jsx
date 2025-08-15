@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "ipetpetu",
   description: "Petpet Euphonie",
+  icons: {
+    icon: '/images/icons/icon1.png',
+  },
 };
 
 export default function RootLayout({ children }) {
