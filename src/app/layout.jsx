@@ -18,7 +18,7 @@ export const metadata = {
   title: "ipetpetu",
   description: "Petpet Euphonie",
   icons: {
-    icon: '/images/icons/icon1.png',
+    icon: '/images/icons/icon1.png?v=2',
   },
 };
 
