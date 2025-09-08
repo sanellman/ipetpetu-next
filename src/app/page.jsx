@@ -140,7 +140,7 @@ export default function Home() {
   }, [isRunning]);
 
   if (!isClient) return null;
-  if (!showMain) return <Countdown />;
+  if (showMain) return <Countdown />;
 
   return (
     <Layout>
