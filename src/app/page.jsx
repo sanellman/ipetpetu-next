@@ -12,7 +12,7 @@ import ScheduleSection from "./components/ScheduleSection";
 import FlipCardGame from "./components/FlipCardGame";
 import ExpensesTab from "./components/ExpensesTab"; // ปรับ path ให้ถูกตามโครงสร้างโปรเจค
 
-const TARGET_DATE = new Date("2025-09-15T17:01:00+07:00");
+const TARGET_DATE = new Date("2025-09-16T00:00:00+07:00");
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
