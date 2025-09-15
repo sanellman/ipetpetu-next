@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-b from-yellow-100 via-white to-yellow-50 py-16 px-6 overflow-hidden">
+    <section className="relative bg-gradient-to-b from-yellow-100 via-white to-yellow-50 py-10 px-6 overflow-hidden">
       {/* Decoration circles */}
       <div className="absolute top-10 left-10 w-24 h-24 bg-yellow-200 rounded-full opacity-30 blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-32 h-32 bg-pink-200 rounded-full opacity-30 blur-3xl"></div>
