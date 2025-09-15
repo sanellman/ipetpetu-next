@@ -12,8 +12,7 @@ import ScheduleSection from "./components/ScheduleSection";
 import FlipCardGame from "./components/FlipCardGame";
 import ExpensesTab from "./components/ExpensesTab"; // ปรับ path ให้ถูกตามโครงสร้างโปรเจค
 
-
-const TARGET_DATE = new Date("2025-09-16T00:00:00+07:00");
+const TARGET_DATE = new Date("2025-09-15T17:01:00+07:00");
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
@@ -36,7 +35,6 @@ function Countdown() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center px-4 py-10 text-[#4a3f2f]"
       style={{ backgroundImage: "url('/images/blackgrounds/flower2.jpg')" }}
     >
-
       {/* Countdown Card */}
       <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-yellow-200 shadow-lg rounded-2xl p-6 mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
@@ -51,9 +49,8 @@ function Countdown() {
         </div>
       </div>
 
-      {/* Tabs: Schedule, Flip Card Game & Expenses */}
+      {/* Tabs */}
       <div className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl mb-10">
-        {/* Tab headers */}
         <div className="flex justify-around border-b border-yellow-200">
           <button
             className={`flex-1 py-3 font-semibold ${activeTab === "schedule" ? "bg-yellow-100" : ""}`}
@@ -74,15 +71,12 @@ function Countdown() {
             🃏 Flip Card Game
           </button>
         </div>
-
-        {/* Tab content */}
         <div className="p-3">
           {activeTab === "schedule" && <ScheduleSection />}
           {activeTab === "flipcard" && <FlipCardGame />}
           {activeTab === "expenses" && <ExpensesTab />}
         </div>
       </div>
-
 
       {/* Footer */}
       <footer className="text-center border-t border-yellow-200 pt-6 w-full max-w-3xl">
@@ -117,27 +111,56 @@ function getTimeLeft() {
   return { total, days, hours, minutes, seconds };
 }
 
+// ----------------- Video Modal -----------------
+function VideoModal({ show, onClose }) {
+  if (!show) return null;
+
+  return (
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50"
+      onClick={onClose} // กดพื้นที่นอก ปิด modal
+    >
+      <div
+        className="bg-white rounded-lg shadow-lg w-11/12 sm:w-4/5 md:w-2/3 lg:max-w-[50%] relative"
+        onClick={(e) => e.stopPropagation()} // กันไม่ให้ปิดเวลาคลิกใน modal
+      >
+        {/* ปุ่มปิด */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl"
+        >
+          ✖
+        </button>
+
+        {/* วิดีโอ */}
+        <div className="p-4">
+          <video
+            src="/videos/2025/petpetbd2025r.mp4"
+            controls
+            autoPlay
+            muted
+            playsInline
+            className="w-full rounded-lg"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
   const [showMain, setShowMain] = useState(false);
-  const [seconds, setSeconds] = useState(0);
-  const [isRunning, setIsRunning] = useState(true);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
     const now = new Date();
-    setShowMain(now >= TARGET_DATE);
-  }, []);
-
-  useEffect(() => {
-    let timer;
-    if (isRunning) {
-      timer = setInterval(() => {
-        setSeconds((prev) => prev + 1);
-      }, 1000);
+    if (now >= TARGET_DATE) {
+      setShowMain(true);
+      setShowVideo(true); // 🎥 เปิด modal อัตโนมัติ
     }
-    return () => clearInterval(timer);
-  }, [isRunning]);
+  }, []);
 
   if (!isClient) return null;
   if (!showMain) return <Countdown />;
@@ -147,6 +170,8 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <GallerySection />
+      {/* Modal Video */}
+      <VideoModal show={showVideo} onClose={() => setShowVideo(false)} />
     </Layout>
   );
 }

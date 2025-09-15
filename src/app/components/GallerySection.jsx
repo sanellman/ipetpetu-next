@@ -1,40 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function GallerySection() {
   const images = [
-  "/images/cards/card1.jpg",
-  "/images/cards/card2.jpg",
-  "/images/cards/card3.jpg",
-  "/images/cards/card4.jpg",
-  "/images/cards/card5.jpg",
-  "/images/cards/card6.jpg",
-  "/images/cards/card7.jpg",
-  "/images/cards/card8.jpg",
-  "/images/cards/card9.jpg",
-  "/images/cards/card10.jpg",
-  "/images/cards/card11.jpg",
-  "/images/cards/card12.jpg",
-  "/images/cards/card13.jpg",
-  "/images/cards/card14.jpg",
-  "/images/cards/card15.jpg",
-  "/images/cards/card16.jpg",
-  "/images/cards/card17.jpg",
-  "/images/cards/card18.jpg",
-  "/images/cards/card19.jpg",
-  "/images/cards/card20.jpg",
-];
+    "/images/cards/card1.jpg",
+    "/images/cards/card2.jpg",
+    "/images/cards/card3.jpg",
+    "/images/cards/card4.jpg",
+    "/images/cards/card5.jpg",
+    "/images/cards/card6.jpg",
+    "/images/cards/card7.jpg",
+    "/images/cards/card8.jpg",
+    "/images/cards/card9.jpg",
+    "/images/cards/card10.jpg",
+    "/images/cards/card11.jpg",
+    "/images/cards/card12.jpg",
+    "/images/cards/card13.jpg",
+    "/images/cards/card14.jpg",
+    "/images/cards/card15.jpg",
+    "/images/cards/card16.jpg",
+    "/images/cards/card17.jpg",
+    "/images/cards/card18.jpg",
+    "/images/cards/card19.jpg",
+    "/images/cards/card20.jpg",
+  ];
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const scrollRef = useRef(null);
+
+  // Auto scroll effect
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let scrollAmount = 0;
+    const speed = 0.5; // ปรับความเร็วได้ (px per frame)
+
+    const scroll = () => {
+      if (!scrollContainer) return;
+
+      scrollAmount += speed;
+      if (scrollAmount >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+        scrollAmount = 0; // รีเซ็ตกลับไปเริ่มใหม่
+      }
+
+      scrollContainer.scrollTo({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+
+      requestAnimationFrame(scroll);
+    };
+
+    const animation = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(animation);
+  }, []);
 
   return (
     <section id="gallery" className="bg-[#fffbe7] py-16 px-4 text-[#4a3f2f]">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8">📸 แกลเลอรี่ Petpet</h2>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" ref={scrollRef}>
           <div className="flex gap-4 px-2 pb-4">
             {images.map((src, index) => (
               <div
