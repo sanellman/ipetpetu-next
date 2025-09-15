@@ -18,19 +18,35 @@ export default function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#4a3f2f] leading-snug">
-            💛 ยินดีต้อนรับสู่โลกของ{" "}
-            <motion.span
-              className="text-yellow-600 drop-shadow-sm"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              Petpet
-            </motion.span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700 italic">
-            "เพราะทุกวันคือรอยยิ้มของ Petpet 🐥✨"
-          </p>
+          {/* Main Identity */}
+          <motion.h1
+            className="text-3xl md:text-4xl mb-4 text-[#4a3f2f]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            ꒰ ᴘᴇᴛᴘᴇᴛ ᴇᴜᴘʜᴏɴɪᴇ☆🐰 ꒱﹆ クリーム色担当 🤍
+          </motion.h1>
+
+          {/* Short Tagline */}
+          <motion.p
+            className="text-lg md:text-xl text-gray-700 italic mb-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            ‧₊ ᴍʏ ᴡʜᴏʟᴇ ᴡᴏʀʟᴅ ɪɴꜰᴊ ˚ ༘
+          </motion.p>
+
+          {/* Cute Line */}
+          <motion.p
+            className="text-base md:text-lg text-yellow-700 font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            ꒰ ✊🏻📦🌻 ꒱  อยู่ด้วยกันไปจนสุดทางนะ 💛
+          </motion.p>
         </motion.div>
 
         {/* Image */}
@@ -41,7 +57,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.img
-            src="/images/petpet/petpet.jpg"
+            src="/images/petpet/petpethero.jpg"
             alt="Petpet"
             className="mx-auto rounded-2xl shadow-2xl w-full max-w-[420px] md:max-w-[500px] border-4 border-yellow-200"
             animate={{ y: [0, -10, 0] }}
