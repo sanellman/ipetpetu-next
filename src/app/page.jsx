@@ -35,6 +35,20 @@ function Countdown() {
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col items-center px-4 py-10 text-[#4a3f2f]"
       style={{ backgroundImage: "url('/images/blackgrounds/flower2.jpg')" }}
     >
+      {/* Countdown Card */}
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-md border border-yellow-200 shadow-lg rounded-2xl p-6 mb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
+          🎂 Countdown to <br />
+          <span className="text-yellow-600">Petpet's Day 🎉</span>
+        </h1>
+        <div className="flex justify-center gap-4 text-xl sm:text-2xl font-mono">
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.days}d</div>
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.hours}h</div>
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.minutes}m</div>
+          <div className="bg-yellow-100 px-4 py-2 rounded-xl shadow-sm">{timeLeft.seconds}s</div>
+        </div>
+      </div>
+
       {/* Tabs */}
       <div className="w-full max-w-4xl bg-white/90 border border-yellow-200 shadow-lg rounded-2xl mb-10">
         <div className="flex justify-around border-b border-yellow-200">
