@@ -62,7 +62,7 @@ export default function ScheduleSection() {
     { value: "Siamdol Cafe", label: "Siamdol Cafe" },
     { value: "Sora! Sora!", label: "Sora! Sora!" },
     { value: "STARRY NITE", label: "STARRY NITE" },
-    { value: "Stellagrima", label: "Stellagrima" },
+    { value: "Stellagrima 💙", label: "Stellagrima 💙" },
     { value: "SUMOMO", label: "SUMOMO" },
     { value: "The Glass Girls", label: "The Glass Girls" },
     { value: "Vinx", label: "Vinx" },
