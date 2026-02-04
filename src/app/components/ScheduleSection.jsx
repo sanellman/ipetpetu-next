@@ -47,6 +47,7 @@ export default function ScheduleSection() {
     { value: "BNK48", label: "BNK48" },
     { value: "CGM48", label: "CGM48" },
     { value: "Chocolatière", label: "Chocolatière" },
+    { value: "Denshi220", label: "Denshi220" },
     { value: "Euphonie", label: "Euphonie" },
     { value: "HatoBito", label: "HatoBito" },
     { value: "IKINARI TELL ME", label: "IKINARI TELL ME" },
