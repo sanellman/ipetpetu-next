@@ -376,9 +376,9 @@ export default function ScheduleSection() {
   const [viewMode, setViewMode] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(VIEW_MODE_KEY);
-      return saved === "calendar" ? "calendar" : "list";
+      return saved === "list" ? "list" : "calendar";
     }
-    return "list";
+    return "calendar";
   });
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
