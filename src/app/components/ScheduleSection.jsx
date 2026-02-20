@@ -479,16 +479,16 @@ export default function ScheduleSection() {
           {/* View toggle */}
           <div className="flex bg-gray-100 rounded-full p-0.5 text-xs">
             <button
-              onClick={() => setViewMode("list")}
-              className={`px-3 py-1 rounded-full font-semibold transition-all ${viewMode === "list" ? "bg-yellow-400 text-white shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
-            >
-              List
-            </button>
-            <button
               onClick={() => setViewMode("calendar")}
               className={`px-3 py-1 rounded-full font-semibold transition-all ${viewMode === "calendar" ? "bg-yellow-400 text-white shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
             >
               Cal
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`px-3 py-1 rounded-full font-semibold transition-all ${viewMode === "list" ? "bg-yellow-400 text-white shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+            >
+              List
             </button>
           </div>
 
