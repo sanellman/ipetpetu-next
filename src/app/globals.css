@@ -6,7 +6,11 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(ellipse 70% 50% at 92% 0%, rgba(251, 191, 36, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 8% 100%, rgba(253, 230, 138, 0.16) 0%, transparent 58%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(254, 243, 199, 0.1) 0%, transparent 65%),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-noto-thai), "Noto Sans Thai", sans-serif;
 }

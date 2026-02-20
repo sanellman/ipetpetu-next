@@ -95,7 +95,7 @@ export default function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="bg-[#fafaf6] py-14 text-[#44382b] overflow-hidden">
+    <section id="gallery" className="py-14 text-[#44382b] overflow-hidden">
       <motion.h2
         className="text-2xl md:text-3xl font-bold text-center mb-8 px-4"
         initial={{ opacity: 0, y: -16 }}

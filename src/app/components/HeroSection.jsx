@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section className="bg-gradient-to-b from-amber-50/60 to-[#fefdf8] py-10 px-6 overflow-hidden">
+    <section className="py-10 px-6 overflow-hidden">
       <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
 
         {/* Image */}

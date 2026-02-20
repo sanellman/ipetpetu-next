@@ -1,9 +1,33 @@
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
+function GrainOverlay() {
+  return (
+    <svg
+      className="fixed inset-0 w-full h-full pointer-events-none"
+      style={{ zIndex: 9998, opacity: 0.08, mixBlendMode: "overlay" }}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <filter id="grain-filter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.68"
+          numOctaves="4"
+          stitchTiles="stitch"
+        />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#grain-filter)" />
+    </svg>
+  );
+}
+
 export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[#fefdf8] text-[#44382b] flex flex-col">
+      {/* Grain texture overlay */}
+      <GrainOverlay />
+
       <header className="bg-white/90 backdrop-blur-sm border-b border-amber-100 shadow-sm py-3 px-4 sticky top-0 z-30">
         <div className="max-w-6xl mx-auto flex items-center justify-center gap-3">
           <img

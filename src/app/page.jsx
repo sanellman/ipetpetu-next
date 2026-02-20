@@ -19,7 +19,7 @@ function ToolsSection() {
   const [activeTab, setActiveTab] = useState("schedule");
 
   return (
-    <section className="bg-[#fefdf8] px-4 py-10">
+    <section className="px-4 py-10">
       <div className="max-w-4xl mx-auto">
         <div className="flex gap-2 mb-6 bg-white rounded-2xl p-1.5 shadow-sm border border-amber-100/80">
           {TABS.map((tab) => (
