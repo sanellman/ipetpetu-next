@@ -3,17 +3,15 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-[#fffbe7] text-[#4a3f2f] flex flex-col">
-      <header className="bg-yellow-100 shadow p-4">
+    <div className="min-h-screen bg-[#fffef3] text-[#4a3f2f] flex flex-col">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-yellow-100 shadow-sm py-3 px-4 sticky top-0 z-30">
         <div className="max-w-6xl mx-auto flex items-center justify-center gap-3">
-          {/* Logo */}
           <img
-            src="/images/petpet/logo_img.png" // 👈 ใช้ path รูปโลโก้ของคุณจริง ๆ
+            src="/images/petpet/logo_img.png"
             alt="iPetpetu Logo"
-            className="w-10 h-10 rounded-full shadow"
+            className="w-9 h-9 rounded-full shadow-sm"
           />
-          {/* Title */}
-          <h1 className="text-xl md:text-2xl font-bold text-[#4a3f2f]">
+          <h1 className="text-xl md:text-2xl font-bold text-[#4a3f2f] tracking-wide">
             iPetpetu
           </h1>
         </div>
@@ -21,9 +19,8 @@ export default function Layout({ children }) {
 
       <main className="flex-grow">{children}</main>
 
-      <footer className="bg-yellow-50 border-t border-yellow-200 py-6 text-center text-sm text-gray-600">
-        <p>ติดตาม Petpet ได้ที่ 💛</p>
-        {/* ลิงก์ Social แบบเดิม */}
+      <footer className="bg-white border-t border-yellow-100 py-6 text-center text-sm text-gray-500">
+        <p className="mb-2">ติดตาม Petpet ได้ที่ 💛</p>
         <div className="flex justify-center gap-6 text-2xl text-[#4a3f2f] mt-1">
           <a href="https://www.facebook.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">
             <FaFacebook className="hover:text-blue-500 transition" />
@@ -38,7 +35,7 @@ export default function Layout({ children }) {
             <FaTiktok className="hover:text-black transition" />
           </a>
         </div>
-        <p className="mt-2">© 2025 Petpet Fan Project</p>
+        <p className="mt-3 text-xs text-gray-400">© 2025 Petpet Fan Project</p>
       </footer>
     </div>
   );
