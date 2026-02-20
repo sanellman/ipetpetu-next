@@ -28,18 +28,28 @@ const cardImages = [
   "/images/cards/card20.jpg",
 ];
 
-function getRandomImages(images, count) {
-  const shuffled = [...images].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
+function fisherYates(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
+function getRandomImages(images, count) {
+  return fisherYates(images).slice(0, count);
+}
 
 function shuffleCards() {
   const selected = getRandomImages(cardImages, 8); // ดึงมา 8 รูปแบบสุ่ม
   const duplicated = [...selected, ...selected];
-  return duplicated
-    .map((src) => ({ id: uuidv4(), src, flipped: false, matched: false }))
-    .sort(() => Math.random() - 0.5);
+  return fisherYates(duplicated).map((src) => ({
+    id: uuidv4(),
+    src,
+    flipped: false,
+    matched: false,
+  }));
 }
 
 export default function FlipCardGame() {

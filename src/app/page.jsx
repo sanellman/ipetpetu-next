@@ -113,6 +113,17 @@ function getTimeLeft() {
 
 // ----------------- Video Modal -----------------
 function VideoModal({ show, onClose }) {
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [show]);
+
   if (!show) return null;
 
   return (

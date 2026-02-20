@@ -10,7 +10,7 @@ export default function Card({ card, onClick }) {
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
-          card.flipped || card.matched ? "rotate-y-180" : ""
+          card.flipped || card.matched ? "[transform:rotateY(180deg)]" : ""
         }`}
       >
         {/* Back side */}
@@ -19,7 +19,7 @@ export default function Card({ card, onClick }) {
         </div>
 
         {/* Front side */}
-        <div className="absolute inset-0 [backface-visibility:hidden] rotate-y-180">
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
           <Image
             src={card.src}
             alt="card"

@@ -30,17 +30,28 @@ export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState(null);
   const scrollRef = useRef(null);
 
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedImage]);
+
   // Auto scroll effect
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
     let scrollAmount = 0;
+    let rafId;
     const speed = 0.5; // ปรับความเร็วได้ (px per frame)
 
     const scroll = () => {
-      if (!scrollContainer) return;
-
       scrollAmount += speed;
       if (scrollAmount >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
         scrollAmount = 0; // รีเซ็ตกลับไปเริ่มใหม่
@@ -51,11 +62,11 @@ export default function GallerySection() {
         behavior: "smooth",
       });
 
-      requestAnimationFrame(scroll);
+      rafId = requestAnimationFrame(scroll);
     };
 
-    const animation = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animation);
+    rafId = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   return (
