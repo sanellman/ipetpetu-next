@@ -19,17 +19,17 @@ function ToolsSection() {
   const [activeTab, setActiveTab] = useState("schedule");
 
   return (
-    <section className="bg-[#fffef3] px-4 py-10">
+    <section className="bg-[#fefdf8] px-4 py-10">
       <div className="max-w-4xl mx-auto">
-        <div className="flex gap-2 mb-6 bg-white rounded-2xl p-1.5 shadow-sm border border-yellow-100">
+        <div className="flex gap-2 mb-6 bg-white rounded-2xl p-1.5 shadow-sm border border-amber-100/80">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                 activeTab === tab.id
-                  ? "bg-yellow-400 text-white shadow"
-                  : "text-gray-500 hover:text-[#4a3f2f]"
+                  ? "bg-amber-400 text-white shadow"
+                  : "text-stone-400 hover:text-[#44382b]"
               }`}
             >
               {tab.label}

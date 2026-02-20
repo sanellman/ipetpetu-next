@@ -41,7 +41,7 @@ function BottomSheet({ open, onClose, title, children }) {
               <div className="w-10 h-1 bg-gray-200 rounded-full" />
             </div>
             <div className="px-5 pb-8 pt-2">
-              <h2 className="text-lg font-bold text-[#4a3f2f] mb-4">{title}</h2>
+              <h2 className="text-lg font-bold text-[#44382b] mb-4">{title}</h2>
               {children}
             </div>
           </motion.div>
@@ -130,7 +130,7 @@ export default function ExpensesTab() {
   return (
     <div className="space-y-5 p-4 max-w-3xl mx-auto">
       {/* Summary bar */}
-      <div className="bg-yellow-400 text-white rounded-2xl p-4 flex items-center justify-between shadow-sm">
+      <div className="bg-amber-400 text-white rounded-2xl p-4 flex items-center justify-between shadow-sm">
         <div>
           <p className="text-xs font-medium opacity-80">ยอดรวมทั้งหมด</p>
           <p className="text-2xl font-bold">
@@ -139,7 +139,7 @@ export default function ExpensesTab() {
         </div>
         <button
           onClick={openAdd}
-          className="bg-white text-yellow-600 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-yellow-50 transition"
+          className="bg-white text-amber-600 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-amber-50 transition"
         >
           + เพิ่ม
         </button>
@@ -153,11 +153,11 @@ export default function ExpensesTab() {
           return (
             <div
               key={date}
-              className="bg-white rounded-2xl shadow-sm border border-yellow-50 overflow-hidden"
+              className="bg-white rounded-2xl shadow-sm border border-amber-50 overflow-hidden"
             >
-              <div className="flex items-center justify-between px-4 py-2.5 bg-yellow-50 border-b border-yellow-100">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-amber-50 border-b border-amber-100">
                 <span className="font-semibold text-sm">{formatDate(date)}</span>
-                <span className="text-sm text-yellow-700 font-medium">
+                <span className="text-sm text-amber-700 font-medium">
                   {dayTotal.toLocaleString("th-TH", { minimumFractionDigits: 2 })} ฿
                 </span>
               </div>
@@ -167,7 +167,7 @@ export default function ExpensesTab() {
                   return (
                     <li
                       key={e.id}
-                      className="flex items-center gap-2 px-4 py-3 hover:bg-yellow-50/60 transition"
+                      className="flex items-center gap-2 px-4 py-3 hover:bg-amber-50/60 transition"
                     >
                       <div
                         className="flex-1 cursor-pointer"
@@ -229,7 +229,7 @@ export default function ExpensesTab() {
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="w-8 h-8 rounded-full bg-yellow-100 hover:bg-yellow-200 disabled:opacity-40 transition flex items-center justify-center text-lg"
+            className="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 disabled:opacity-40 transition flex items-center justify-center text-lg"
           >
             ‹
           </button>
@@ -237,7 +237,7 @@ export default function ExpensesTab() {
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="w-8 h-8 rounded-full bg-yellow-100 hover:bg-yellow-200 disabled:opacity-40 transition flex items-center justify-center text-lg"
+            className="w-8 h-8 rounded-full bg-amber-100 hover:bg-amber-200 disabled:opacity-40 transition flex items-center justify-center text-lg"
           >
             ›
           </button>
@@ -252,20 +252,20 @@ export default function ExpensesTab() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-semibold mb-1 text-[#4a3f2f]">วันที่</label>
+            <label className="block text-sm font-semibold mb-1 text-[#44382b]">วันที่</label>
             <input
               type="date"
               value={form.date}
               onChange={(e) => setForm({ ...form, date: e.target.value })}
-              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold mb-1 text-[#4a3f2f]">ประเภท</label>
+            <label className="block text-sm font-semibold mb-1 text-[#44382b]">ประเภท</label>
             <select
               value={form.type}
               onChange={(e) => setForm({ ...form, type: e.target.value })}
-              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-300"
             >
               <option value="">-- เลือกประเภท --</option>
               {EXPENSE_TYPES.map((t) => (
@@ -274,29 +274,29 @@ export default function ExpensesTab() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold mb-1 text-[#4a3f2f]">โน้ต</label>
+            <label className="block text-sm font-semibold mb-1 text-[#44382b]">โน้ต</label>
             <input
               type="text"
               value={form.note}
               onChange={(e) => setForm({ ...form, note: e.target.value })}
               placeholder="รายละเอียดเพิ่มเติม..."
-              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold mb-1 text-[#4a3f2f]">จำนวนเงิน (บาท)</label>
+            <label className="block text-sm font-semibold mb-1 text-[#44382b]">จำนวนเงิน (บาท)</label>
             <input
               type="number"
               value={form.amount}
               onChange={(e) => setForm({ ...form, amount: e.target.value })}
               placeholder="0.00"
-              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <div className="flex gap-3 pt-2">
             <button
               onClick={saveExpense}
-              className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 rounded-xl transition"
+              className="flex-1 bg-amber-400 hover:bg-amber-500 text-white font-bold py-3 rounded-xl transition"
             >
               บันทึก
             </button>
