@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Animatable CSS custom properties for gradient blobs */
+@property --b1x { syntax: '<percentage>'; inherits: false; initial-value: 92%; }
+@property --b1y { syntax: '<percentage>'; inherits: false; initial-value: 0%;  }
+@property --b2x { syntax: '<percentage>'; inherits: false; initial-value: 8%;  }
+@property --b2y { syntax: '<percentage>'; inherits: false; initial-value: 100%;}
+@property --b3x { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+@property --b3y { syntax: '<percentage>'; inherits: false; initial-value: 48%; }
+
 :root {
   --background: #fefdf8;
   --foreground: #44382b;
@@ -7,10 +15,19 @@
 
 body {
   background:
-    radial-gradient(ellipse 70% 50% at 92% 0%, rgba(251, 191, 36, 0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 45% at 8% 100%, rgba(253, 230, 138, 0.16) 0%, transparent 58%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(254, 243, 199, 0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 60% at var(--b1x) var(--b1y), rgba(251, 191, 36, 0.55)  0%, transparent 65%),
+    radial-gradient(ellipse 62% 55% at var(--b2x) var(--b2y), rgba(245, 158, 11, 0.35)  0%, transparent 62%),
+    radial-gradient(ellipse 52% 48% at var(--b3x) var(--b3y), rgba(253, 230, 138, 0.40) 0%, transparent 68%),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-noto-thai), "Noto Sans Thai", sans-serif;
+  animation: bgFloat 22s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloat {
+  0%   { --b1x: 92%; --b1y: 0%;  --b2x: 8%;  --b2y: 100%; --b3x: 50%; --b3y: 48%; }
+  25%  { --b1x: 85%; --b1y: 6%;  --b2x: 14%; --b2y: 90%;  --b3x: 44%; --b3y: 38%; }
+  50%  { --b1x: 78%; --b1y: 3%;  --b2x: 20%; --b2y: 82%;  --b3x: 58%; --b3y: 55%; }
+  75%  { --b1x: 88%; --b1y: 10%; --b2x: 11%; --b2y: 92%;  --b3x: 40%; --b3y: 60%; }
+  100% { --b1x: 80%; --b1y: 7%;  --b2x: 18%; --b2y: 86%;  --b3x: 54%; --b3y: 42%; }
 }

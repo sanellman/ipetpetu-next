@@ -1,11 +1,12 @@
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import SparkleOverlay from "./SparkleOverlay";
 
 function GrainOverlay() {
   return (
     <svg
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 9998, opacity: 0.08, mixBlendMode: "overlay" }}
+      style={{ zIndex: 9998, opacity: 0.07, mixBlendMode: "overlay" }}
       xmlns="http://www.w3.org/2000/svg"
     >
       <filter id="grain-filter">
@@ -24,18 +25,20 @@ function GrainOverlay() {
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-[#fefdf8] text-[#44382b] flex flex-col">
-      {/* Grain texture overlay */}
+    <div className="min-h-screen text-[#44382b] flex flex-col">
+      {/* Background layers */}
       <GrainOverlay />
+      <SparkleOverlay />
 
-      <header className="bg-white/90 backdrop-blur-sm border-b border-amber-100 shadow-sm py-3 px-4 sticky top-0 z-30">
+      {/* Navbar — full width frosted glass */}
+      <header className="sticky top-0 z-30 bg-white/55 backdrop-blur-md border-b border-amber-100/50 shadow-sm py-3 px-4">
         <div className="max-w-6xl mx-auto flex items-center justify-center gap-3">
           <img
             src="/images/petpet/logo_img.png"
             alt="iPetpetu Logo"
-            className="w-9 h-9 rounded-full shadow-sm"
+            className="w-8 h-8 rounded-full shadow-sm ring-2 ring-amber-200/60"
           />
-          <h1 className="text-xl md:text-2xl font-bold text-[#44382b] tracking-wide">
+          <h1 className="text-lg md:text-xl font-bold text-[#44382b] tracking-wide">
             iPetpetu
           </h1>
         </div>
@@ -43,7 +46,7 @@ export default function Layout({ children }) {
 
       <main className="flex-grow">{children}</main>
 
-      <footer className="bg-white border-t border-amber-100 py-6 text-center text-sm text-stone-400">
+      <footer className="bg-white/50 backdrop-blur-sm border-t border-amber-100/60 py-6 text-center text-sm text-stone-400">
         <p className="mb-2 text-stone-500">ติดตาม Petpet ได้ที่ 💛</p>
         <div className="flex justify-center gap-6 text-2xl text-[#44382b] mt-1">
           <a href="https://www.facebook.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">

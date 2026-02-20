@@ -21,7 +21,7 @@ function ToolsSection() {
   return (
     <section className="px-4 py-10">
       <div className="max-w-4xl mx-auto">
-        <div className="flex gap-2 mb-6 bg-white rounded-2xl p-1.5 shadow-sm border border-amber-100/80">
+        <div className="flex gap-2 mb-6 bg-white/60 backdrop-blur-sm rounded-2xl p-1.5 shadow-sm border border-white/50">
           {TABS.map((tab) => (
             <button
               key={tab.id}

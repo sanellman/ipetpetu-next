@@ -30,7 +30,7 @@ export default function AboutSection() {
           {INFO_CARDS.map((card, i) => (
             <motion.div
               key={card.label}
-              className="bg-[#fefdf8] border border-amber-100/80 rounded-2xl p-4 shadow-sm flex gap-3 items-start"
+              className="bg-white/60 backdrop-blur-sm border border-white/50 rounded-2xl p-4 shadow-sm flex gap-3 items-start"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.07, duration: 0.35 }}
