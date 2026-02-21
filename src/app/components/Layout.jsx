@@ -44,9 +44,9 @@ export default function Layout({ children }) {
         </div>
       </header>
 
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow relative z-10">{children}</main>
 
-      <footer className="bg-white/50 backdrop-blur-sm border-t border-amber-100/60 py-6 text-center text-sm text-stone-400">
+      <footer className="relative z-10 bg-white/50 backdrop-blur-sm border-t border-amber-100/60 py-6 text-center text-sm text-stone-400">
         <p className="mb-2 text-stone-500">ติดตาม Petpet ได้ที่ 💛</p>
         <div className="flex justify-center gap-6 text-2xl text-[#44382b] mt-1">
           <a href="https://www.facebook.com/petpet.euphonie" target="_blank" rel="noopener noreferrer">
