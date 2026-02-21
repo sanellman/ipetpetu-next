@@ -43,7 +43,7 @@ export default function SparkleOverlay() {
   return (
     <div
       className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: 9997 }}
+      style={{ zIndex: 1 }}
     >
       {SPARKLES.map((sp, i) => (
         <motion.div
